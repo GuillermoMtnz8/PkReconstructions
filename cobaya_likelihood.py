@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[205]:
+# In[254]:
 
 
 #Packages to be loaded. Probably there are duplicated or missing ones
@@ -17,7 +17,7 @@ from scipy.interpolate import interp1d
 
 # # Cosmological parameters #
 
-# In[207]:
+# In[255]:
 
 
 #Constantes cosmológicas:
@@ -45,7 +45,7 @@ OmegabJPAS = OmegabJPASh2/hJPAS**2; OmegaCDMJPAS = OmegaCDMJPASh2/hJPAS**2;
 OmegaLJPAS = 1 - OmegamJPAS;
 
 
-# In[245]:
+# In[256]:
 
 
 #Parámetros del Fiducial obtenidos con CAMB:
@@ -59,7 +59,7 @@ DaFid = 1208.54809555
 
 # # k and z binning #
 
-# In[223]:
+# In[257]:
 
 
 #Bineado de k y de z
@@ -72,10 +72,10 @@ KArrayCompleto = np.exp(np.arange(math.log(kminKArrayCompleto), math.log(kmaxKAr
 KArray = KArrayCompleto[range(121,246)]
 
 #Bines de k por arriba y por abajo
-KArrayUpper = np.zeros(len(ks)); KArrayLower = np.zeros(len(ks));
+KArrayUpper = np.zeros(len(KArray)); KArrayLower = np.zeros(len(KArray));
 
-for i in range(0, len(ks)-1):
-    KArrayUpper[i] = ks[i] + (ks[i+1]-ks[i])/2;   KArrayLower[i] = ks[i] - (ks[i+1]-ks[i])/2;
+for i in range(0, len(KArray)-1):
+    KArrayUpper[i] = KArray[i] + (KArray[i+1]-KArray[i])/2;   KArrayLower[i] = KArray[i] - (KArray[i+1]-KArray[i])/2;
 
 KArrayUpper[-1] = KArrayUpper[-2];  KArrayLower[-1] = KArrayLower[-2];
 
@@ -91,7 +91,7 @@ positions_Lower = [1, 3, 5, 7, 9, 11, 13]
 
 # # P(k) data and densities reading #
 
-# In[210]:
+# In[258]:
 
 
 # Define a class to read the simulated data specifying the path as input
@@ -129,14 +129,14 @@ data.keys()
 
 # # CAMB settings and results #
 
-# In[211]:
+# In[259]:
 
 
 # Let's try to obtain a PPS and Pm with nodes when using CAMB
 
 #Se dan los valores de los nodos
 nodes_log_k = [np.log(KArray[0]), np.log(KArray[-1])]
-nodes_log_PPS = [3.5, 3.7]
+nodes_log_PPS = [2.3, 3.1]
 
 #Se deshace la escala log
 nodes_k = np.exp(nodes_log_k)
@@ -160,7 +160,7 @@ pars.set_matter_power(redshifts=za, kmax=KArrayCompleto[-1])
 pars.NonLinear = model.NonLinear_none
 
 
-# In[212]:
+# In[260]:
 
 
 #Resultados de CAMB con los nodos incorporados. Generamos un P de materia y calculamos, por ejemplo sigma8
@@ -175,7 +175,7 @@ s8 = np.array(results.get_sigma8())
 
 # # Classes to interface with Cobaya #
 
-# In[213]:
+# In[261]:
 
 
 # I assume this method above is ok, so I will now create the classes to interface with Cobaya
@@ -187,7 +187,7 @@ from cobaya.theory import Theory
 from cobaya.likelihood import Likelihood
 
 
-# In[214]:
+# In[262]:
 
 
 #Clase con la teoría, es decir, con la modificación del Primordial para incluir nuestros nodos
@@ -201,7 +201,7 @@ class NodesInPrimordialPk(Theory):
         
         pivot_scalar = 0.05   #Valor del pivote
         nodes_k = [params_values_dict['k1'], params_values_dict['k2']] #Nombre nodos eje x
-        nodes_PPS = [params_values_dict['pk1'], params_values_dict['pk2']] #nombre nodos eje y
+        nodes_PPS = [params_values_dict['P1'], params_values_dict['P2']] #nombre nodos eje y
         
         #Se interpolan estos nodos.
         Pk_func = interp1d(nodes_k, nodes_PPS,
@@ -220,10 +220,10 @@ class NodesInPrimordialPk(Theory):
    
     #Función que retorna los parámetros de los nodos
     def get_can_support_params(self):
-        return ['k1', 'k2', 'pk1', 'pk2']
+        return ['k1', 'k2', 'P1', 'P2']
 
 
-# In[243]:
+# In[263]:
 
 
 #Clase con el likelihood. Aquí tendremos que introducir nuestro modelo y el cálculo del likelihood
@@ -413,7 +413,7 @@ class Pklike(Likelihood): #Se define la clase.
         return lnlike
 
 
-# In[83]:
+# In[264]:
 
 
 # This is how you pass input to Cobaya
@@ -435,7 +435,7 @@ info = {'debug': True,                        #Esto permite obtener info de los 
         'H0': {'prior': {'dist': 'norm', 'loc': hJPASFid*100, 'scale': 0.54}, 'latex': 'H_0'}}}
 
 
-# In[ ]:
+# In[265]:
 
 
 # Let's reproduce the same matter power spectrum as the one by single camb through the cobaya interface
