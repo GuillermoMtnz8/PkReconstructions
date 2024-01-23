@@ -6,8 +6,8 @@
 
 #In Densities_HighZ.dat the simulated densities for the HighZ objects are given.
 
-#In Monopole&Likelihood_CAMB the monopole power spectrum and the likelihood to be used are defined.
+#In Monopole&Likelihood_CAMB.ipynb the monopole power spectrum and the likelihood to be used are defined.
 
-#In Monopole&Likelihood_CAMB_compact the notebook 'Calculo_Multipolo_CAMB' in compacted in less cells.
+#In Monopole&Likelihood_CAMB_compact.ipynb the notebook 'Monopole&Likelihood_CAMB.ipyn' in compacted in less cells.
 
 #In cobaya_likelihood the settings for running cobaya with our model and likelihood are specified, including a modfication in the matter power spectrum to accomodate the nodes in the primordial power spectrum.
