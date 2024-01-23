@@ -8,6 +8,6 @@
 
 #In Monopole&Likelihood_CAMB.ipynb the monopole power spectrum and the likelihood to be used are defined.
 
-#In Monopole&Likelihood_CAMB_compact.ipynb the notebook 'Monopole&Likelihood_CAMB.ipyn' in compacted in less cells.
+#In cobaya_likelihood.ipynb the settings for running cobaya with our model and likelihood are specified, including a modfication in the matter power spectrum to accomodate the nodes in the primordial power spectrum.
 
-#In cobaya_likelihood the settings for running cobaya with our model and likelihood are specified, including a modfication in the matter power spectrum to accomodate the nodes in the primordial power spectrum.
+#In cobaya_likelihood_Original.ipynb the file cobaya_likelihood.ipynb is given in the original version that GCH send to me.
