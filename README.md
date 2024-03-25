@@ -9,3 +9,5 @@
 #CosmoChord mimic contains the files used for reproducing CosmoChord previous results.
 
 #In cobaya_likelihood_Original_Guada.ipynb the file cobaya_likelihood.ipynb is given in the original version that GCH send to me.
+
+#Monopole&Likelihood_CAMB.ipynb is an example of a working monopole and likelihood in a notebook.
