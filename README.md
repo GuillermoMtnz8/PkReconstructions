@@ -16,4 +16,4 @@ In '**cobaya_likelihood_Original_Guada.ipynb**' the file cobaya_likelihood.ipynb
 
 '**Monopole&Likelihood_CAMB.ipynb**' is an example of a working monopole and likelihood in a notebook.
 
-Also in this repository we include an aplication to a J-PAS Forecast, in the folder **J-PAS_Forecast** 
+Also in this repository we include an aplication to a J-PAS Forecast, in the folder **J-PAS_Forecast_Reconstructions** 
